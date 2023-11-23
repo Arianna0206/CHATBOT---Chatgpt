@@ -102,7 +102,7 @@ def obtener_respuesta(pregunta, query):
     similitud = response.get('source_documents')[0].page_content
 
     info_documentos.append(f"Documento: {nombre_documento}")
-    info_documentos.append(f"Similitud: \n {similitud}")
+    # info_documentos.append(f"Similitud: \n {similitud}")
     
 
     return respuesta, info_documentos
@@ -117,7 +117,7 @@ def upload_data(archivos):
                 st.session_state.file_uploaded = True 
 
 def main():
-    st.title("Hola soy Eli tu asistente, ¿En qué te puedo ayudar?")
+    st.title("🤖 Hola soy Eli tu asistente bancario")
 
     # Initialize session state variables
     if 'query' not in st.session_state:
