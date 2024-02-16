@@ -35,7 +35,7 @@ def get_model():
 def initialize_bot():
     progress_bar = st.progress(0)
     progress_text = st.empty()
-    progress_text.text("Leyendo documentos...")
+    progress_text.text("Leendo documentos...")
     texts = cargar_datos()
     progress_bar.progress(25) 
 
@@ -102,7 +102,7 @@ def obtener_respuesta(pregunta, query):
     similitud = response.get('source_documents')[0].page_content
 
     info_documentos.append(f"Documento: {nombre_documento}")
-    # info_documentos.append(f"Similitud: \n {similitud}")
+    info_documentos.append(f"Similitud: \n {similitud}")
     
 
     return respuesta, info_documentos
@@ -117,7 +117,25 @@ def upload_data(archivos):
                 st.session_state.file_uploaded = True 
 
 def main():
-    st.title("🤖 Hola soy Eli tu asistente bancario")
+    # st.title("🤖 Hola soy Eli tu asistente bancario")
+    # st.image("./Assets/Morado Moderno Tecnología y Juegos Logotipo.gif", caption="Hola soy Eli tu asistente bancario", width=300)
+    """ st.markdown(
+        f'<div style="display: flex; justify-content: center;"><img src="./Assets/Eli.gif" width="300"></div>', 
+        unsafe_allow_html=True,
+        ) """
+        
+    from PIL import Image
+
+    # Open the gif image file
+    # img = Image.open("./Assets/Eli.gif")
+    # img = st.image("./Assets/Eli.gif", width=300)
+
+    # Create a column layout
+    col1, col2, col3 = st.columns([1,2,1])
+
+    # Display the image in the center column
+    col2.image('./Assets/Eli.gif', width=300)
+    st.markdown("## Hola, soy Eli. ¿Qué puedo buscar por ti hoy?")
 
     # Initialize session state variables
     if 'query' not in st.session_state:
@@ -146,10 +164,10 @@ def main():
     # Respond to the question
     if pregunta_usuario and st.session_state.query:
         respuesta_chatbot, documentos_info = obtener_respuesta(pregunta_usuario, st.session_state.query)
-        st.subheader("Respuesta del Chatbot:")
+        st.subheader("Resumen:")
         st.write(respuesta_chatbot)
 
-        st.markdown("#### Información del Documento:")
+        st.markdown("#### Información y similitud del Documento:")
         for doc_info in documentos_info:
             st.markdown(f"* {doc_info}", unsafe_allow_html=True)
 
